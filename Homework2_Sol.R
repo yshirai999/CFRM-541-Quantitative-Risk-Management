@@ -25,8 +25,9 @@ d <- 1 / d
 cc <- sweep(cstar, 1, d, "*")
 cc <- t(sweep(t(cstar), 1, d, "*"))
 # Comparing cc and c
-mean(cc)
-mean(c)
+# average correlation increases (decreases) if eps>0 (eps<0)...
+mean(cc) > mean(c)
+#but not each pairwise correlation increases (decreases)
 comp <- cc > c
 sum(comp)
 rm(list = ls())
