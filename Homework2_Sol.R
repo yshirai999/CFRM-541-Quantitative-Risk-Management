@@ -1,14 +1,14 @@
 ## load data
 library("fBasics")
 data("DowJones30")
-x = DowJones30[,2:31]
+x <- DowJones30[, 2:31]
 ## Compute correlation matrix
-R = cor(x)
-r <- eigen(R)
-Gam <- r$vectors
-Del <- r$values ##R = Gam Del Gam^-1, Note: Del is row vector of eigenvalues
+c <- cor(x)
+r <- eigen(c)
+gam <- r$vectors
+del <- r$values ##c = gam del gam^-1, Note: del is row vector of eigenvalues
 ## Create new correlation matrix
 eps <- 0.1
-Del[1] = Del[1]+eps
-Del[1]
-Rstar = Gams
+del[1] <- del[1] + eps
+del[1]
+cstar <- gam
