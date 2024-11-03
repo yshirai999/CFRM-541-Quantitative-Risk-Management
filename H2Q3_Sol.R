@@ -20,7 +20,6 @@ gam <- res$loadings
 c <- cov(delta_r)
 gam_c <- eigen(c)$vector
 del_c <- eigen(c)$values
-
 # Explained variability
 varexp <- cumsum(del) / sum(del)
 varexp
