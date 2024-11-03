@@ -7,7 +7,12 @@ shell("cls")
 ## Load libraries and data
 library(data.table) # recall to run install.packages("data.table")
 data <- fread("USRiskFreeRatesWeekly.csv", header = TRUE)
-r <- as.matrix(data[, 2:ncol(data)])
+dates <- as.Date(as.matrix(data[, 1]))
+t0 <- as.Date("2007-01-01")
+t1 <- as.Date("2007-12-31")
+t0 <- which(abs(dates - t0) == min(abs(dates - t0)))
+t1 <- which(abs(dates - t1) == min(abs(dates - t1)))
+r <- as.matrix(data[t0:t1, 2:ncol(data)])
 n <- nrow(r)
 
 ## PCA
