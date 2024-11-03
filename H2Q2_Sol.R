@@ -8,7 +8,7 @@ r <- eigen(c)
 gam <- r$vectors
 del <- r$values #c = gam del gam^-1, Note: del is row vector of eigenvalues
 # Create new correlation matrix
-eps <- -0.5
+eps <- -50
 del[1] <- del[1] + eps
 del[1]
 # matrix multiplication is optimized given form of del
@@ -30,5 +30,6 @@ mean(cc) > mean(c)
 #but not each pairwise correlation increases (decreases)
 comp <- cc > c
 sum(comp)
+# The larger the absolute change in lambda_1, the smaller (larger) is sum(comp)
 rm(list = ls())
 shell("cls")
