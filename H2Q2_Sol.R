@@ -1,9 +1,10 @@
-#restart session
+#Restart session
 rm(list = ls())
 shell("cls")
 
 ## H2Q2 Stressing a correlation matrix
-# load data
+
+## Load libraries and data
 library("fBasics")
 data("DowJones30")
 x <- DowJones30[1:600, 2:31]
@@ -12,7 +13,8 @@ c <- cor(x)
 r <- eigen(c)
 gam <- r$vectors
 del <- r$values #c = gam del gam^-1, Note: del is row vector of eigenvalues
-# Create new correlation matrix
+
+## Create new correlation matrix
 eps <- -50
 del[1] <- del[1] + eps
 del[1]
@@ -29,10 +31,11 @@ d <- diag(cstar)
 d <- 1 / d
 cc <- sweep(cstar, 1, d, "*")
 cc <- t(sweep(t(cstar), 1, d, "*"))
-# Comparing cc and c
-# average correlation increases (decreases) if eps>0 (eps<0)...
+
+## Comparing cc and c
+# Average correlation increases (decreases) if eps>0 (eps<0)...
 mean(cc) > mean(c)
-#but not each pairwise correlation increases (decreases)
+# ...but not each pairwise correlation increases (decreases)
 comp <- cc > c
 sum(comp)
 # In fact (try it) the larger |eps|, the smaller (larger) is sum(comp)
