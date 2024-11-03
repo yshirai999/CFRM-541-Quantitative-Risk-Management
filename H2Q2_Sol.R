@@ -1,4 +1,9 @@
-## load data
+#restart session
+rm(list = ls())
+shell("cls")
+
+## H2Q2 Stressing a correlation matrix
+# load data
 library("fBasics")
 data("DowJones30")
 x <- DowJones30[1:600, 2:31]
@@ -30,6 +35,4 @@ mean(cc) > mean(c)
 #but not each pairwise correlation increases (decreases)
 comp <- cc > c
 sum(comp)
-# The larger the absolute change in lambda_1, the smaller (larger) is sum(comp)
-rm(list = ls())
-shell("cls")
+# In fact (try it) the larger |eps|, the smaller (larger) is sum(comp)
