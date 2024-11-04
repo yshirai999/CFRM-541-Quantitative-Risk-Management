@@ -42,17 +42,17 @@ del <- res$sdev
 gam <- res$loadings
 del3 <- del[1:3]
 gam3 <- gam[, 1:3]
-gam3 <- gam3[c("WGS1YR","WGS10YR","WGS20YR"),]
+gam3 <- gam3[c("WGS1YR", "WGS10YR", "WGS20YR"), ]
 # VaR
 library(qrmtools)
 mu_dr_pi <- c(mu_dr["WGS1YR"], mu_dr["WGS10YR"], mu_dr["WGS20YR"])
 mu_pi <- -f * sum(mu_dr_pi)
 sig_dr_pi <- diag(c(sig_dr["WGS1YR"], sig_dr["WGS10YR"], sig_dr["WGS20YR"]))
-sig_pc <- (del[1:3])^2 # standard deviation of principal components 
+sig_pc <- (del[1:3])^2 # standard deviation of principal components
 sig_pi_1 <- sweep(t(gam3), 1, sig_dr_pi, "*")
 sig_pi <- t(sweep(t(sig_pi_1), 1, sig_pc, "*"))
 sig_pi <- sqrt(f^2 * sum(sig_pi %*% t(sig_pi_1)))
-alpha <- 1-2^seq(log(1-0.001, base = 2), -10, length.out = 256)
+alpha <- 1 - 2^seq(log(1 - 0.001, base = 2), -10, length.out = 256)
 dg3 <- t(sweep(t(gam3), 1, del3, "*"))
 dgd3 <- dg3 %*% t(gam3)
 var_n <- mu_pi + VaR_t(alpha, scale = sig_pi, df = Inf)
