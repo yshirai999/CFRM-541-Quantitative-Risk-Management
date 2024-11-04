@@ -2,7 +2,7 @@
 rm(list = ls())
 shell("cls")
 
-## H2Q2 Stressing a correlation matrix
+## H2Q3 Comparing VaR for normal model with historically simulated
 
 ## Load libraries and data
 library(data.table) # recall to run install.packages("data.table")
@@ -16,9 +16,9 @@ r <- as.matrix(data[t, 2:ncol(data)])
 r1 <- r[, "WGS1YR"]
 r10 <- r[, "WGS10YR"]
 r20 <- r[, "WGS20YR"]
-r_pi <- c(1 - r1 / 100, 1 - r10 / 100, 1 - r20 / 100)
+r_pi <- c(1 - r1 / 100, 1 - r10 * 10 / 100, 1 - r20 * 20 / 100)
 f <- 1000000
-pi <- f * (exp(-r1 * 1 / 100) + exp(-r1 * 10 / 100) + exp(-r1 * 20 / 100))
+pi <- f * (exp(-r1 / 100) + exp(-r10 * 10 / 100) + exp(-r20 * 20 / 100))
 pi_approx <- f * (r_pi %*% c(1, 1, 1))
 pi
 pi_approx
@@ -45,7 +45,8 @@ gam3 <- gam[, 1:3]
 gam3 <- gam3[c("WGS1YR", "WGS10YR", "WGS20YR"), ]
 # VaR
 library(qrmtools)
-mu_dr_pi <- c(mu_dr["WGS1YR"], mu_dr["WGS10YR"], mu_dr["WGS20YR"])
+mu_dr_pi <- c(mu_dr["WGS1YR"] / 100,
+              mu_dr["WGS10YR"] * 10 / 100, mu_dr["WGS20YR"] * 20 / 100)
 mu_pi <- -f * sum(mu_dr_pi)
 sig_dr_pi <- diag(c(sig_dr["WGS1YR"], sig_dr["WGS10YR"], sig_dr["WGS20YR"]))
 sig_pc <- (del[1:3])^2 # standard deviation of principal components
@@ -57,12 +58,29 @@ dg3 <- t(sweep(t(gam3), 1, del3, "*"))
 dgd3 <- dg3 %*% t(gam3)
 var_n <- mu_pi + VaR_t(alpha, scale = sig_pi, df = Inf)
 es_n  <- mu_pi + ES_t(alpha, scale = sig_pi, df = Inf)
-#Plot
-plot(1 - alpha, es_n, type = "l", ylim = range(var_n, es_n), log = "x",
-     col = "maroon3", xlab = expression(1 - alpha), ylab = "")
-lines(1 - alpha, var_n, col = "black")
-legend("topright", bty = "n", lty = rep(1, 2), col = c("maroon3", "black"),
-       legend = c(expression(ES[alpha] ~ ~ "for normal model"),
-                  expression(VaR[alpha] ~ ~ "for normal model")))
 
 ## Question 3
+# Historical Simulation
+r <- as.matrix(data[t0:t1, 2:ncol(data)])
+r <- r[, c("WGS1YR", "WGS10YR", "WGS20YR")]
+dr <- (r[2:n, ] - r[1:n - 1, ])
+loss <- -f * rowSums(dr * c(1 / 100, 10 / 100, 20 / 100))
+loss_sorted <- sort(loss)
+loss_cdf <- seq_along(loss_sorted) / length(loss_sorted)
+plot(loss_sorted, loss_cdf, type = "s")
+abline(h = 0.95, lty = 3)
+var_hs <- loss_sorted[which(loss_cdf >= alpha[1])[1]]
+for (a in alpha[2:length(alpha)]) {
+  var_hs <- c(var_hs, loss_sorted[which(loss_cdf >= a)[1]])
+}
+
+#Plot
+plot(1 - alpha, es_n, type = "l", ylim = range(var_n, es_n, var_hs), log = "x",
+     col = "maroon3", xlab = expression(1 - alpha), ylab = "")
+lines(1 - alpha, var_n, col = "black")
+lines(1 - alpha, var_hs, col = "yellow")
+legend("topright", bty = "n", lty = rep(1, 3),
+       col = c("maroon3", "black", "yellow"),
+       legend = c(expression(ES[alpha] ~ ~ "for normal model"),
+                  expression(VaR[alpha] ~ ~ "for normal model"),
+                  expression(VaR[alpha] ~ ~ "for historical simulation")))
