@@ -67,7 +67,7 @@ dr <- (r[2:n, ] - r[1:n - 1, ])
 loss <- -f * rowSums(dr * c(1 / 100, 10 / 100, 20 / 100))
 loss_sorted <- sort(loss)
 loss_cdf <- seq_along(loss_sorted) / length(loss_sorted)
-plot(loss_sorted, loss_cdf, type = "s")
+plot.new(loss_sorted, loss_cdf, type = "s")
 abline(h = 0.95, lty = 3)
 var_hs <- loss_sorted[which(loss_cdf >= alpha[1])[1]]
 for (a in alpha[2:length(alpha)]) {
@@ -75,8 +75,8 @@ for (a in alpha[2:length(alpha)]) {
 }
 
 #Plot
-plot(1 - alpha, es_n, type = "l", ylim = range(var_n, es_n, var_hs), log = "x",
-     col = "maroon3", xlab = expression(1 - alpha), ylab = "")
+plot.new(1 - alpha, es_n, type = "l", ylim = range(var_n, es_n, var_hs),
+         log = "x", col = "maroon3", xlab = expression(1 - alpha), ylab = "")
 lines(1 - alpha, var_n, col = "black")
 lines(1 - alpha, var_hs, col = "yellow")
 legend("topright", bty = "n", lty = rep(1, 3),
