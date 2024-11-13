@@ -5,7 +5,7 @@ shell("cls")
 
 ## Load libraries and data
 library(data.table) # recall to run install.packages("data.table")
-data <- fread("USRiskFreeRatesWeekly.csv", header = TRUE)
+data <- fread("C://Users//yoshi//OneDrive//Desktop//Teaching//CFRM541 QRM//QRM_Git//QRM//H2//USRiskFreeRatesWeekly.csv", header = TRUE)
 dates <- as.Date(as.matrix(data[, 1]))
 
 ## Question 1
