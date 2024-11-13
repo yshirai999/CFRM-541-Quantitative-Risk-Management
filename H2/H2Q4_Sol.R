@@ -5,7 +5,9 @@ shell("cls")
 
 ## Load libraries and data
 library(data.table) # recall to run install.packages("data.table")
-data <- fread("C://Users//yoshi//OneDrive//Desktop//Teaching//CFRM541 QRM//QRM_Git//QRM//H2//USRiskFreeRatesWeekly.csv", header = TRUE)
+path <- "C://Users//yoshi//OneDrive//Desktop
+//Teaching//CFRM541 QRM//QRM_Git//QRM//H2//USRiskFreeRatesWeekly.csv"
+data <- fread(path, header = TRUE)
 dates <- as.Date(as.matrix(data[, 1]))
 
 ## Question 1
@@ -43,7 +45,7 @@ del3 <- del[1:3]
 gam3 <- gam[, 1:3]
 gam3 <- gam3[c("WGS1YR", "WGS10YR", "WGS20YR"), ]
 # VaR
-library(qrmtools)
+
 mu_dr_pi <- c(mu_dr["WGS1YR"] / 100,
               mu_dr["WGS10YR"] * 10 / 100, mu_dr["WGS20YR"] * 20 / 100)
 mu_pi <- -f * sum(mu_dr_pi)
