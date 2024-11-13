@@ -31,3 +31,16 @@ var_t
 ## Note that the VaR for the fitted t distribution is higher
 ## This is because the empirical distribution is capped by the
 ## maximum value observed.
+
+## Also note that the historical simulation is based on the
+## unconditional loss distribution. M estimators may be constructed
+## each based on sampling with replacement N returns from the
+## dataset. The 95%-interquantile range provides then a good idea
+## of the uncertainty in the VaR. Similarly, one can use bootstrap
+## to predict uncertainty in the VaR estimate as of part b.
+
+## Finally, time series methods may be used to estimate the
+## conditional loss distribution VaR. This generally means fitting
+## a time series model to the distribution of return, and then
+## estimate VaR based on it. If time permits, we may discuss this
+## at the end of the course.
