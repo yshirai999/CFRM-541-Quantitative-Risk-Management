@@ -1,5 +1,5 @@
-function [] = CorpBondPortfolio(N,R)
-
+%function [] = CorpBondPortfolio(N,R)
+N = 10000;
 % This function should be used to complete the question on Assignment 3 regarding the risk of a PortfolioData of
 % corporate bonds.
 % N is the number of samples used in the Monte-Carlo. R is the constant recovery rate.
@@ -38,7 +38,7 @@ randn('state',sum(100*clock));  % Randomizing the start state of the normal rand
 
 C = chol(CorrMatrix);
 Z = randn(NumBonds, N);
-W = (C'*Z)';   % Usual method of generating corelated normal random variables
+W = (C'*Z)';   % Usual method of generating correlated normal random variables
 
 rating = zeros(N, NumBonds);
 
