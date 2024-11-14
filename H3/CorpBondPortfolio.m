@@ -1,5 +1,13 @@
+%% 
+clear
+clc
+
+%%
 %function [] = CorpBondPortfolio(N,R)
 N = 10000;
+
+%% 
+
 % This function should be used to complete the question on Assignment 3 regarding the risk of a PortfolioData of
 % corporate bonds.
 % N is the number of samples used in the Monte-Carlo. R is the constant recovery rate.
@@ -25,6 +33,9 @@ BondPrice = zeros(8, NumBonds);
 for j = 1:NumBonds
                  % Compute defaulted bond prices here
     for i = 1:7  % Now compute bond prices in the other 7 possible ratings. Remember to include the coupons
+      
+        
+        
     end    
 end
 
@@ -33,12 +44,17 @@ end
 % Now find the value of the portfolio if every bond remains in the original rating after one year
 
 
+
+
+
+
+
 % Now simulate the transition ratings
 randn('state',sum(100*clock));  % Randomizing the start state of the normal random number generator
 
 C = chol(CorrMatrix);
 Z = randn(NumBonds, N);
-W = (C'*Z)';   % Usual method of generating correlated normal random variables
+W = (C'*Z)';   % Usual method of generating corelated normal random variables
 
 rating = zeros(N, NumBonds);
 
