@@ -1,8 +1,15 @@
 # Basics codes and examples for Quantitative risk management course
 
-- This course homework rely heavily on those in the Quantitative Risk Management course taught by prof. M. Haugh at Columbia University in the A.Y. 2012-2013.
-- I will not post here the solutions to the homework. Students will have access to them on Canvas.
-- Some problems are also taken from various examples in McNeill, Frey and Embrecht, *Quantitative Risk Management*, Princeton University Press, 2nd Edition (2015).
+- This course provides a comprehensive treatment of the theoretical concepts and modeling techniques of quantitative risk management. At the end of the class, students are expected to master theoretical concepts of risk management and apply them in market and
+operational risk modeling.
+- Topics considered:
+  - VaR, CVaR, Historical Simulation
+  - Elliptical Distributions
+  - Factor Models and Principal Component Analysis
+  - Copula Models
+  - Risk Measures and Capital Allocation
+  - Mean-CVaR Analysis
+- The design of this course relies heavily on the book **Quantitative Risk Management** by McNeil, Frey and Embrechts and on **Prof. Haugh**'s QRM class taught at Columbia University in Spring 2013.
 
 ## Installation
 
