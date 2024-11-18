@@ -1,4 +1,4 @@
-# Basics codes and examples for Quantitative risk management course
+# Homework assignments for CFRM541 Quantitative Risk Management - Winter 2025
 
 - This course provides a comprehensive treatment of the theoretical concepts and modeling techniques of quantitative risk management. At the end of the class, students are expected to master theoretical concepts of risk management and apply them in market and
 operational risk modeling.
