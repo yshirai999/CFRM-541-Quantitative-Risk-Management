@@ -9,7 +9,7 @@ operational risk modeling.
   - Copula Models
   - Risk Measures and Capital Allocation
   - Mean-CVaR Analysis
-- The design of this course relies heavily on the book **Quantitative Risk Management** by McNeil, Frey and Embrechts and on **Prof. Haugh**'s QRM class taught at Columbia University in Spring 2013.
+- The design of this course and the homework rely heavily on **Prof. Haugh**'s QRM class taught at Columbia University in 2016.
 
 ## Installation
 
