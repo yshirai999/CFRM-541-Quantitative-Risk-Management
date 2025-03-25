@@ -6,7 +6,7 @@ shell("cls")
 ## Load libraries and data
 library(data.table, qrmtools)
 library(here) # recall to run install.packages("here")
-filename <- here("QRM", "H2", "USRiskFreeRatesWeekly.csv")
+filename <- here("H2", "USRiskFreeRatesWeekly.csv")
 data <- fread(file = filename, header = TRUE)
 dates <- as.Date(as.matrix(data[, 1]))
 

@@ -7,8 +7,8 @@ library("Ecdat") # recall to run install.packages("Ecdat")
 data("SP500")
 x <- SP500
 pi0 <- 1000000
-pi <- cumprod(1 + x / 100)
-loss <- -pi[2:2780] + pi[1:2779]
+pi <- cumprod(1 + x)
+loss <- -pi[2:2780,] + pi[1:2779,]
 
 ## VaR by Historical Simulation
 loss_sorted <- sort(loss)
